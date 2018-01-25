@@ -22,6 +22,12 @@ class Road:
 
 class RaceCar:
 
-    def __init__(self,img_path):
+    def __init__(self,screen,img_path):
         self.img = pygame.image.load(img_path)
+        self.img = pygame.transform.scale(self.img, (75, 150))
         self.rect = self.img.get_rect()
+        self.rect.move_ip(290,320)
+        self.screen = screen
+
+    def draw(self):
+        self.screen.blit(self.img,self.rect)
