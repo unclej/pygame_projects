@@ -10,9 +10,8 @@ speed = 1
 
 def main():
     global speed
-    road = []
-    road.append(Road(screen,"images/road1.png",0))
-    road.append(Road(screen,"images/road2.png",-480))
+    #create the road
+    road = [Road(screen, "images/road1.png", 0), Road(screen, "images/road2.png", -480)]
     car = RaceCar(screen,"images/car.png")
     obstacles = []
     for i in range(4):

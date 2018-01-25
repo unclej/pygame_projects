@@ -1,6 +1,4 @@
-import random
-
-import pygame
+import pygame,random
 from pygame.locals import *
 
 class Road:
