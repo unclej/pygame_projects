@@ -1,6 +1,5 @@
-import pygame, sys
-from pygame.locals import *
-from ball import *
+import sys
+from BouncingBall.ball import *
 
 pygame.init()
 

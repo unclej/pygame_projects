@@ -1,6 +1,5 @@
-import pygame, sys
-from pygame.locals import *
-from racing_classes import *
+import sys
+from Racing.racing_classes import *
 
 pygame.init()
 size = (width, height) = (850, 480)
@@ -11,12 +10,12 @@ speed = 1
 def main():
     global speed
     #create the road
-    road = [Road(screen, "images/road1.png", 0), Road(screen, "images/road2.png", -480)]
-    car = RaceCar(screen,"images/car.png")
+    road = [Road(screen, "../images/road1.png", 0), Road(screen, "../images/road2.png", -480)]
+    car = RaceCar(screen,"../images/car.png")
     obstacles = []
     for i in range(4):
-        obstacles.append(Obstacle(screen, "images/cone.png", 150 + i * 50, -280))
-        obstacles.append(Obstacle(screen,"images/cone.png",360+i*50, -30))
+        obstacles.append(Obstacle(screen, "../images/cone.png", 150 + i * 50, -280))
+        obstacles.append(Obstacle(screen,"../images/cone.png",360+i*50, -30))
     while True:
         clock.tick(60)
         for event in pygame.event.get():
