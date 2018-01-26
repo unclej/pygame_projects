@@ -1,34 +1,43 @@
+import random
 import sys
 from pygame.locals import *
 from Platformer.sprite_loader import *
 from Platformer.player import Player
+from Platformer.platform import Platform
 
 pygame.init()
+font = pygame.font.SysFont(None,70)
 size = (width, height) = (850, 480)
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 speed = 1
 color = (204, 0, 255)
+text = font.render("Game Over",True,(255,0,0))
+text_rect = text.get_rect()
+text_rect.centerx = width //2
+text_rect.centery = height //2
 
 def main():
     p1_sheet = SpriteSheet('images/p1_spritesheet.png')
     p1_file = open('images/p1_spritesheet.txt','r')
     p1_actions = {}
     sprite_list = pygame.sprite.Group()
+    platforms = pygame.sprite.Group()
+    game_over = False
     for line in p1_file:
         line = line.rstrip().split(" ")
         p1_actions[line[0]] = p1_sheet.get_image(int(line[2]),int(line[3]),int(line[4]),int(line[5]))
-    player = Player(p1_actions)
+    for i in range(4):
+        for j in range (2):
+            plat = Platform(random.randint(5,80)*10,0+120*i, 'images/grassHalf.png', 70, 40)
+            platforms.add(plat)
+    player = Player(platforms.sprites()[-1].rect.right-35, platforms.sprites()[-1].rect.top-35,p1_actions)
     sprite_list.add(player)
-
     while True:
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == QUIT:
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    player.jump()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             player.left()
@@ -37,11 +46,14 @@ def main():
 
         frame = (pygame.time.get_ticks()//40 %11)+1
         frame = str(frame).zfill(2)
-        player.update(frame)
+        if player.update(frame, platforms):
+            game_over = True
         screen.fill(color)
+        if game_over:
+            screen.blit(text, text_rect)
+        platforms.draw(screen)
         sprite_list.draw(screen)
         pygame.display.flip()
-
 
 
 if __name__ == "__main__":
