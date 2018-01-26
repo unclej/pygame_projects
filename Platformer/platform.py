@@ -16,4 +16,3 @@ class Platform(pygame.sprite.Sprite):
         if self.rect.top > 480:
             self.rect.top = -50
             self.rect.left = random.randint(5,80)*10
-
