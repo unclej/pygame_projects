@@ -3,7 +3,7 @@ from pygame.locals import *
 
 class Ball:
     def __init__(self,screen):
-        self.img = pygame.image.load("../images/ball.gif")
+        self.img = pygame.image.load("../images/ball.png")
         self.img = pygame.transform.scale(self.img,(20,20))
         self.rect = self.img.get_rect()
         self.rect.move_ip(320, 200)

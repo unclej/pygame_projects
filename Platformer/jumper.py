@@ -50,7 +50,6 @@ def main():
             text = font.render("Score: {}".format(player.progress), True, (255, 0, 0))
             text_rect = text.get_rect()
         screen.fill(color)
-
         platforms.draw(screen)
         sprite_list.draw(screen)
         screen.blit(text, text_rect)
