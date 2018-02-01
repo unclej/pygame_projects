@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.facing = "R"
         self.jump_speed = -14
         self.world_y = 480-y
-        self.progress = self.world_y
+        self.progress = 0
 
     def update(self, platforms):
         #update the image direction
@@ -46,7 +46,7 @@ class Player(pygame.sprite.Sprite):
                 if plat.rect.bottom > 0:
                     plat.scroll(-1*self.dy)
                 else:
-                    platforms.remove(plat)
+                    plat.kill()
             return True
 
         #check if the player hit any platforms
