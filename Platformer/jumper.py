@@ -6,8 +6,11 @@ from Platformer.player import Player
 from Platformer.platform import Platform
 
 pygame.init()
+screen_info = pygame.display.Info()
+
+# set the width and height to the size of the screen
+size = (width, height) = (screen_info.current_w, screen_info.current_h)
 font = pygame.font.SysFont(None,70)
-size = (width, height) = (850, 480)
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 color = (204, 0, 255)
@@ -17,19 +20,19 @@ text_rect = ''
 def main():
     global text, text_rect
     p1_sheet = SpriteSheet('images/p1_spritesheet.png')
-    p1_file = open('images/p1_spritesheet.txt','r')
+    p1_file = open('images/p1_spritesheet.txt', 'r')
     p1_actions = {}
     sprite_list = pygame.sprite.Group()
     platforms = pygame.sprite.Group()
     game_over = False
-    #create a dictionary of all player images
+    # create a dictionary of all player images
     for line in p1_file:
         line = line.rstrip().split(" ")
-        p1_actions[line[0]] = p1_sheet.get_image(int(line[2]),int(line[3]),int(line[4]),int(line[5]))
-    #create platforms
-    for i in range(4):
-        for j in range (2):
-            plat = Platform(random.randint(5,80)*10,0+120*i, 'images/grassHalf.png', 70, 40)
+        p1_actions[line[0]] = p1_sheet.get_image(int(line[2]), int(line[3]), int(line[4]), int(line[5]))
+    # create platforms
+    for i in range(height // 100):
+        for j in range(width // 420):
+            plat = Platform(random.randint(5, (width-50)//10)*10, 0+120*i, 'images/grassHalf.png', 70, 40)
             platforms.add(plat)
     player = Player(platforms.sprites()[-1].rect.right-35, platforms.sprites()[-1].rect.top-35,p1_actions)
     sprite_list.add(player)
@@ -38,6 +41,11 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 sys.exit()
+            if event.type ==  KEYDOWN:
+                if event.key == K_f:
+                    pygame.display.set_mode(size, FULLSCREEN)
+                if event.key == K_ESCAPE:
+                    pygame.display.set_mode(size)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             player.left()
