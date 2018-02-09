@@ -14,9 +14,11 @@ class Player(pygame.sprite.Sprite):
         self.facing = "R"
         self.jump_speed = -14
         self.world_y = 480-y
-        self.progress = self.world_y
+        self.progress = 0
 
     def update(self, platforms):
+        screen_info = pygame.display.Info()
+
         #update the image direction
         self.image = self.images['p1_jump']
         if self.facing == "L":
@@ -26,8 +28,8 @@ class Player(pygame.sprite.Sprite):
         self.dx = 0
 
         if self.rect.right < 0:
-            self.rect.left = 850
-        elif self.rect.left > 850:
+            self.rect.left = screen_info.current_w
+        elif self.rect.left > screen_info.current_w:
             self.rect.right = 0
         #handle vertical movement
         self.rect.y += self.dy
@@ -40,13 +42,13 @@ class Player(pygame.sprite.Sprite):
             for plat in platforms.sprites():
                 plat.scroll(-1*self.dy)
         #scroll platforms up (player fell off world)
-        elif self.rect.top > 400:
-            self.rect.top = 400
+        elif self.rect.top > screen_info.current_h-80:
+            self.rect.top = screen_info.current_h-80
             for plat in platforms.sprites():
                 if plat.rect.bottom > 0:
                     plat.scroll(-1*self.dy)
                 else:
-                    platforms.remove(plat)
+                    plat.kill()
             return True
 
         #check if the player hit any platforms
