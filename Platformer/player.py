@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.dy = 0
         self.facing = "R"
         self.jump_speed = -14
-        self.world_y = 480-y
+        self.world_y = pygame.display.Info().current_h-y
         self.progress = 0
 
     def update(self, platforms):
