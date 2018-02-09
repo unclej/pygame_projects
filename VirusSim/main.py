@@ -78,7 +78,7 @@ def process_data():
     fig = plt.figure()
     plt.scatter(x, y)
     plt.title('Doctors needed to prevent an outbreak\n started by 5 bacteria')
-    plt.xlabel('split time (ms)')
+    plt.xlabel('split time (refreshes)')
     plt.ylabel('Doctors Needed')
     fig.savefig('data.png')
 
