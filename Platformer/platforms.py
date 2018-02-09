@@ -1,7 +1,7 @@
 import pygame, random
 
 
-class Platform(pygame.sprite.Sprite):
+class Platforms(pygame.sprite.Sprite):
 
     def __init__(self, x, y, img_path, width=70, height=70):
         super().__init__()

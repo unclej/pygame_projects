@@ -3,7 +3,7 @@ import sys
 from pygame.locals import *
 from Platformer.sprite_loader import *
 from Platformer.player import Player
-from Platformer.platform import Platform
+from Platformer.platforms import Platforms
 
 pygame.init()
 screen_info = pygame.display.Info()
@@ -32,7 +32,7 @@ def main():
     # create platforms
     for i in range(height // 100):
         for j in range(width // 420):
-            plat = Platform(random.randint(5, (width-50)//10)*10, 0+120*i, 'images/grassHalf.png', 70, 40)
+            plat = Platforms(random.randint(5, (width-50)//10)*10, 0+120*i, 'images/grassHalf.png', 70, 40)
             platforms.add(plat)
     player = Player(platforms.sprites()[-1].rect.right-35, platforms.sprites()[-1].rect.top-35,p1_actions)
     sprite_list.add(player)
